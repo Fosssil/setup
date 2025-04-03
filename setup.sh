@@ -181,11 +181,12 @@ print_success "$number_of_upgradable packages can be upgraded"
 
 # System upgrade prompt
 while true; do
-  input_prompt "Do you want to Full upgrade the system? (y|N)"
+  input_prompt "Do you want to fully upgrade the system? (y|N)"
   read -r yn
   case "$yn" in
   [yY])
-    echo "Okay"
+    print_section "Updating the system"
+    sudo apt-get dist-upgrade -y
     break
     ;;
   [nN] | "")
