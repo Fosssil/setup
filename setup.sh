@@ -177,7 +177,7 @@ fi
 # Getting number of upgradable packages
 print_section "Checking upgradable packages"
 number_of_upgradable="$(sudo apt list --upgradable 2>/dev/null | grep -vc "^Listing...")"
-print_success "$number_of_upgradable packages can be upgraded"
+print_success "$number_of_upgradable packages can be upgraded (^o^)／"
 
 # System upgrade prompt
 while true; do
@@ -185,7 +185,7 @@ while true; do
   read -r yn
   case "$yn" in
   [yY])
-    print_section "Updating the system"
+    print_section "Okay, Updating the system (◕‿◕✿)"
     sudo apt-get dist-upgrade -y
     break
     ;;
