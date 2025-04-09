@@ -17,8 +17,8 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-dpkg_solution() {
-  sudo DEBIAN_FRONTEND=noninteractive "${1}"
+run_apt_get() {
+  sudo DEBIAN_FRONTEND=noninteractive apt-get -y "$@"
 }
 
 # Printing functions
@@ -71,7 +71,7 @@ fi
 
 # Update apt repositories
 print_section "Updating Repos..."
-if sudo apt-get update && sudo apt-get autoremove -y >/dev/null && sudo apt-get autoclean >/dev/null; then
+if run_apt_get update && run_apt autoremove >/dev/null && run_apt_get autoclean >/dev/null; then
   print_success "Repositories updated"
 else
   print_warning "Warning: Repository update failed, continuing..."
@@ -111,7 +111,7 @@ fi
 print_section "Installing required packages:"
 packages=("git" "curl" "ansible-core" "neovim" "nodejs")
 printf "${yellow}+ %s\n${reset}" "${packages[@]}"
-if sudo apt-get install -y "${packages[@]}" >/dev/null; then
+if run_apt_get install "${packages[@]}" >/dev/null; then
   print_success "[*] done"
 else
   print_warning "Warning: Some packages failed to install, continuing..."
@@ -190,7 +190,7 @@ while true; do
   case "$yn" in
   [yY])
     print_section "Okay, Updating the system (◕‿◕✿)"
-    sudo apt-get dist-upgrade -y
+    run_apt_get dist-upgrade
     break
     ;;
   [nN] | "")
@@ -221,3 +221,5 @@ while true; do
   *) echo "Invalid response, please enter 'y' or 'n'" ;;
   esac
 done
+
+# TO-DO: Added automation for screen
