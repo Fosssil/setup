@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-dpkg_solution() {
-  sudo DEBIAN_FRONTEND=noninteractive "${1}"
+run_apt() {
+  sudo DEBIAN_FRONTEND=noninteractive apt-get -y "$@"
 }
 
-dpkg_solution "apt install tree -y"
+run_apt install tree
