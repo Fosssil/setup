@@ -17,6 +17,10 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
+dpkg_solution() {
+  sudo DEBIAN_FRONTEND=noninteractive "${1}"
+}
+
 # Printing functions
 input_prompt() {
   printf "\n"
